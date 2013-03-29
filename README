@@ -1,0 +1,84 @@
+Stippler turns greyscale images in pgm format into a list of points.
+I have used the output to create lit images based on photographs [2,3,4].
+
+Stippler is based on the research of Adrian Secord [1]. At the time I
+began work on Stippler, he hadn't released his source code yet.
+
+
+Stippler requires X11, OpenGL, and libpgm.  Hardware accelerated
+OpenGL is required for high performance.  To build stippler, simply
+install any needed development packages and type "make".  Several
+binaries are created, one for each different output format.  These
+include postscript (stippler_ps), "g-code" to control a 3-axis milling
+machine (stippler), and a format I used to drive a DAC connected to an
+XY scope (stippler_dac).  
+
+
+Usage:
+[environment] stippler pgmfile [scale [dotcount]] > outputfile
+
+    environment settings
+        VARIABLE_SIZE: if set, use variable-size dots
+        REVERSE_VIDEO: if set, use black dots on a white background    
+
+    pgmfile:
+        A greyscale input file in "pgm" format.  It generally must
+        be smaller than the screen resolution.
+
+    scale:
+        internally use SCALExSCALE tiles each the size of the input
+        image to make higher dotcount images give better results.
+        If scale is bigger than 16, it is taken to be the dotcount,
+        and scale is chosen to give approximately 500 pixels per
+        output dot.
+
+    dotcount:
+        use this many dots, instead of a dot count that gives
+        approximately 500 pixels per output dot
+
+
+Example:
+To stipple example.ppm with 3200 dots in reverse video:
+
+    env REVERSE_VIDEO=x stippler example.ppm 3200
+
+It is important that the whole stippler window stay exposed
+while stippler is running.  This is because the "glx" spec does
+not require the back buffer contents to be defined when the
+window is obscured, and at least some popular drivers make the
+obscured parts of the back buffer read back as black.
+
+Initally, the dots are spread over the whole image by performing
+a sort of dithering operation on the input image.  Then, the dots are
+repeatedly displaced according to Secord's algorithm, until the program
+judges that they are all in their final locations.
+
+When the program completes, it writes some stuff to stdout and then
+waits for the user to hit control-c.  If the user hits control-c early,
+then the program bails out before it believes all the points have
+settled to their final locations, and then it immediately exits.
+
+
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+[1] http://www.mrl.nyu.edu/~ajsecord/stipples.html
+[2] http://emergent.unpy.net/index.cgi/01109259892
+[3] http://emergent.unpy.net/index.cgi/01109127822
+[4] http://emergent.unpy.net/index.cgi/01108611472
+
+//////////////////////////////////////////////////
+
+This source code is a modified version for ArcheOS by Luca Bezzi of Arc-Team (luca.bezzi@arc-team.com)
