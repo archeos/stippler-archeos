@@ -1,11 +1,11 @@
-stippler (1.0-0archeos2) theodoric; urgency=low
+stippler (1.0-0archeos2+nmu1) theodoric; urgency=low
 
   * Non-maintainer upload.
   * Debian policy (naming conventions, debian files...)
 
  -- Romain Janvier <romain.janvier@hotmail.fr>  Tue, 18 Jun 2013 16:10:27 +0200
 
-stippler (1.0-1) unstable; urgency=low
+stippler (1.0-0archeos1) theodoric; urgency=low
 
   * Initial release
 
