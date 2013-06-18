@@ -2,8 +2,8 @@ Source: stippler
 Section: graphics
 Priority: extra
 Maintainer: Luca Bezzi <luca.bezzi@arc-team.com>
-Build-Depends: debhelper (>= 9.0.0), mesa-common-dev, libnetpbm10-dev, libglu1-mesa-dev
-Standards-Version: 3.9.3
+Build-Depends: debhelper (>= 9.0.0), mesa-common-dev, libnetpbm10-dev, libglu1-mesa-dev, libxi-dev, libxmu-dev
+Standards-Version: 3.9.4
 Homepage: http://emergent.unpythonic.net/software/01133127497-stippler-source-release
 #Vcs-Git: git://git.debian.org/collab-maint/stippler.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/stippler.git;a=summary
